@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>한국시계</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      // React
+      const rootElement = document.getElementById("root");
+      const root = ReactDOM.createRoot(rootElement);
+
+      const Id = ({ handleIdChange }) => {
+        return (
+          <>
+            <label>ID: </label>
+            <input onChange={handleIdChange} />
+          </>
+        );
+      };
+      const Pw = ({ handlePwdChange }) => {
+        return (
+          <>
+            <label>PW: </label>
+            <input onChange={handlePwdChange} />
+          </>
+        );
+      };
+      const App = () => {
+        const [id, setId] = React.useState("");
+        const [pwd, setPwd] = React.useState("");
+        const handleIdChange = (event) => {
+          console.log("Id: ", event.target.value);
+          setId(event.target.value);
+        };
+        const handlePwdChange = (event) => {
+          console.log("Pwd: ", event.target.value);
+          setPwd(event.target.value);
+        };
+
+        const handleOnClick = () => {
+          alert(`id = ${id}, pwd=${pwd}`);
+        };
+        return (
+          <>
+            <Id handleIdChange={handleIdChange} />
+            <br />
+            <Pw handlePwdChange={handlePwdChange} />
+            <button
+              disabled={id.length === 0 || pwd.length === 0}
+              onClick={handleOnClick}
+            >
+              Login
+            </button>
+          </>
+        );
+      };
+      root.render(<App />);
+    </script>
+  </body>
+</html>
